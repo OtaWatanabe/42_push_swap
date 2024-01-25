@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operations_0.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: otawatanabe <otawatanabe@student.42.fr>    +#+  +:+       +#+        */
+/*   By: 1309839457 <1309839457@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 16:39:02 by otawatanabe       #+#    #+#             */
-/*   Updated: 2024/01/24 21:03:25 by otawatanabe      ###   ########.fr       */
+/*   Updated: 2024/01/25 12:50:35 by 1309839457       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	rotate(t_double_list *a)
 	t_double_list	*last;
 
 	first = a -> next;
-	first -> next;
+	second = first -> next;
 	last = a -> prev;
 	if (first == last)
 		return ;

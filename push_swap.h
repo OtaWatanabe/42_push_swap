@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: otawatanabe <otawatanabe@student.42.fr>    +#+  +:+       +#+        */
+/*   By: 1309839457 <1309839457@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 13:15:17 by otawatanabe       #+#    #+#             */
-/*   Updated: 2024/01/24 21:04:28 by otawatanabe      ###   ########.fr       */
+/*   Updated: 2024/01/25 13:06:01 by 1309839457       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include <stdarg.h>
 # include <limits.h>
 # include "libft/libft.h"
+# include "ft_printf.h"
 
 typedef struct s_double_list
 {
@@ -42,5 +43,6 @@ void	rr(t_double_list *a, t_double_list *b);
 void	rra(t_double_list *a);
 void	rrb(t_double_list *b);
 void	rrr(t_double_list *a, t_double_list *b);
+void    print_all(t_double_list *a, t_double_list *b);
 
 #endif

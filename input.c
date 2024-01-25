@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: otawatanabe <otawatanabe@student.42.fr>    +#+  +:+       +#+        */
+/*   By: 1309839457 <1309839457@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 13:13:05 by otawatanabe       #+#    #+#             */
-/*   Updated: 2024/01/24 20:43:39 by otawatanabe      ###   ########.fr       */
+/*   Updated: 2024/01/25 13:05:48 by 1309839457       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,11 +100,4 @@ int	main(int argc, char *argv[])
 	if (same_num(input_list))
 		return (0);
 	solve(input_list, argc - 1);
-	t_double_list	*a;
-	a = input_list -> next;
-	while (a != input_list)
-	{
-		ft_printf("num:%d order:%d\n", a -> num, a -> order);
-		a = a->next;
-	}
 }
