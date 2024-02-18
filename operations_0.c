@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   operations_0.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: 1309839457 <1309839457@student.42.fr>      +#+  +:+       +#+        */
+/*   By: otawatanabe <otawatanabe@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 16:39:02 by otawatanabe       #+#    #+#             */
-/*   Updated: 2024/01/25 12:50:35 by 1309839457       ###   ########.fr       */
+/*   Updated: 2024/02/18 13:33:32 by otawatanabe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,11 @@ void	reverse_rotate(t_double_list *a)
 	a -> prev = second_last;
 }
 
-void	rrr(t_double_list *a, t_double_list *b)
+void	rrr(t_info *info)
 {
-	ft_printf("rrr\n");
-	reverse_rotate(a);
-	reverse_rotate(b);
+	info->operations = ft_strjoin(info->operations, "rrr\n");
+	if (info->operations == NULL)
+		error_exit();
+	reverse_rotate(info->a);
+	reverse_rotate(info->b);
 }

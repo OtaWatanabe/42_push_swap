@@ -3,42 +3,52 @@
 /*                                                        :::      ::::::::   */
 /*   operations_2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: 1309839457 <1309839457@student.42.fr>      +#+  +:+       +#+        */
+/*   By: otawatanabe <otawatanabe@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 20:59:20 by otawatanabe       #+#    #+#             */
-/*   Updated: 2024/01/25 12:51:05 by 1309839457       ###   ########.fr       */
+/*   Updated: 2024/02/18 13:34:08 by otawatanabe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ra(t_double_list *a)
+void	ra(t_info *info)
 {
-	ft_printf("ra\n");
-	rotate(a);
+	info->operations = ft_strjoin(info->operations, "ra\n");
+	if (info->operations == NULL)
+		error_exit();
+	rotate(info->a);
 }
 
-void	rb(t_double_list *b)
+void	rb(t_info *info)
 {
-	ft_printf("rb\n");
-	rotate(b);
+	info->operations = ft_strjoin(info->operations, "rb\n");
+	if (info->operations == NULL)
+		error_exit();
+	rotate(info->b);
 }
 
-void	rr(t_double_list *a, t_double_list *b)
+void	rr(t_info *info)
 {
-	ft_printf("rr\n");
-	rotate(a);
-	rotate(b);
+	info->operations = ft_strjoin(info->operations, "rr\n");
+	if (info->operations == NULL)
+		error_exit();
+	rotate(info->a);
+	rotate(info->b);
 }
 
-void	rra(t_double_list *a)
+void	rra(t_info *info)
 {
-	ft_printf("rra\n");
-	reverse_rotate(a);
+	info->operations = ft_strjoin(info->operations, "rra\n");
+	if (info->operations == NULL)
+		error_exit();
+	reverse_rotate(info->a);
 }
 
-void	rrb(t_double_list *b)
+void	rrb(t_info *info)
 {
-	ft_printf("rra\n");
-	reverse_rotate(b);
+	info->operations = ft_strjoin(info->operations, "rrb\n");
+	if (info->operations == NULL)
+		error_exit();
+	reverse_rotate(info->b);
 }

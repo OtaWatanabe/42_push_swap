@@ -3,42 +3,52 @@
 /*                                                        :::      ::::::::   */
 /*   operations_1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: 1309839457 <1309839457@student.42.fr>      +#+  +:+       +#+        */
+/*   By: otawatanabe <otawatanabe@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 20:52:51 by otawatanabe       #+#    #+#             */
-/*   Updated: 2024/01/25 13:11:40 by 1309839457       ###   ########.fr       */
+/*   Updated: 2024/02/18 13:40:33 by otawatanabe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sa(t_double_list *a)
+void	sa(t_info *info)
 {
-	ft_printf("sa\n");
-	swap(a);
+	info->operations = ft_strjoin(info->operations, "sa\n");
+	if (info->operations == NULL)
+		error_exit();
+	swap(info->a);
 }
 
-void 	sb(t_double_list *b)
+void	sb(t_info *info)
 {
-	ft_printf("sb\n");
-	swap(b);
+	info->operations = ft_strjoin(info->operations, "sb\n");
+	if (info->operations == NULL)
+		error_exit();
+	swap(info->b);
 }
 
-void	ss(t_double_list *a, t_double_list *b)
+void	ss(t_info *info)
 {
-	ft_printf("ss\n");
-	swap(a);
-	swap(b);
+	info->operations = ft_strjoin(info->operations, "ss\n");
+	if (info->operations == NULL)
+		error_exit();
+	swap(info->a);
+	swap(info->b);
 }
 
-void	pa(t_double_list *a, t_double_list *b)
+void	pa(t_info *info)
 {
-	ft_printf("pa\n");
-	push(b, a);
+	info->operations = ft_strjoin(info->operations, "pa\n");
+	if (info->operations == NULL)
+		error_exit();
+	push(info->b, info->a);
 }
 
-void	pb(t_double_list *a, t_double_list *b)
+void	pb(t_info *info)
 {
-	ft_printf("pb\n");
-	push(a, b);
+	info->operations = ft_strjoin(info->operations, "pb\n");
+	if (info->operations == NULL)
+		error_exit();
+	push(info->a, info->b);
 }

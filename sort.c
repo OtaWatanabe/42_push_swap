@@ -3,37 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: 1309839457 <1309839457@student.42.fr>      +#+  +:+       +#+        */
+/*   By: otawatanabe <otawatanabe@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 18:33:43 by otawatanabe       #+#    #+#             */
-/*   Updated: 2024/01/25 13:14:18 by 1309839457       ###   ########.fr       */
+/*   Updated: 2024/02/18 13:47:51 by otawatanabe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int	same_num(t_double_list *input_list)
-{
-	t_double_list	*list;
-	t_double_list	*list_compare;
-
-	list = input_list->next;
-	while (list != input_list)
-	{
-		list_compare = list->next;
-		while (list_compare != input_list)
-		{
-			if (list_compare->num == list->num)
-			{
-				ft_printf("Error\n");
-				return (1);
-			}
-			list_compare = list_compare->next;
-		}
-		list = list->next;
-	}
-	return (0);
-}
 
 void	get_order(t_double_list *input_list)
 {
@@ -49,79 +26,68 @@ void	get_order(t_double_list *input_list)
 		{
 			if (list_compare->num < list->num)
 				++(list->order);
+			else if (list_compare != list && list_compare->num == list->num)
+				error_exit();
 			list_compare = list_compare->next;
 		}
 		list = list->next;
 	}
 }
 
-void	range_move(t_double_list *a, t_double_list *b, int min, int max, int a_to_b)
-{
-	int	c;
-
-	c = 0;
-	while (c < max - min)
-	{
-		if (min <= a->next->num && b->next->num <= max)
-		{
-			if (a_to_b)
-				pb(a, b);
-			else
-				pa(a, b);
-			++c;
-		}
-		else if (a_to_b)
-			ra(a);
-		else
-			rb(b);
-	}
-}
-
 void	solve(t_double_list *a, int size_all)
 {
 	t_double_list	*b;
-	// int				a_size;
+	t_info			*info;
 
-	get_order(a);
+	info = ft_calloc(1, sizeof(t_info));
 	b = malloc(sizeof(t_double_list));
-	if (b == NULL)
-	{
-		ft_printf("Error\n");
-		return ;
-	}
-	b -> next = b;
-	b -> prev = b;
+	if (b == NULL || info == NULL)
+		error_exit();
+	b->next = b;
+	b->prev = b;
+	info->a = a;
+	info->b = b;
+	info->operations = "";
 	if (size_all == 0)
 		return ;
+	else if (size_all == 3)
+		sort_3(info, 0);
+	else if (size_all == 5)
+		sort_5(info);
+	else
+		sort_many(info, size_all);
+	reduce_and_print(info->operations);
+}
 
-	pb(a, b);
-	print_all(a, b);
-	pb(a, b);
-	print_all(a, b);
-	sa(a);
-	print_all(a, b);
-	ss(a, b);
-	print_all(a, b);
-	sb(b);
-	print_all(a, b);
-	ra(a);
-	print_all(a, b);
-	rb(b);
-	print_all(a, b);
-	rr(a, b);
-	print_all(a, b);
-	rra(a);
-	print_all(a, b);
-	rrb(b);
-	print_all(a, b);
-	rrr(a, b);
-	print_all(a, b);
-	pb(a, b);
-	print_all(a, b);
-	
-	// a_size = size_all;
-	// while (1)
-	// {
-	// 	range_move(a, b, 0, size_all / 2, 1);
-	// }
+void	b_recursive(t_info *info, int b_min, int b_max)
+{
+	int	mid;
+
+	if (b_max - b_min <= 3)
+	{
+		sort_push_back(info, b_max - b_min);
+		return ;
+	}
+	mid = (b_min + b_max) / 2;
+	range_pa(info, mid, b_max);
+	b_min = info->next_sort;
+	b_recursive(info, b_min, mid);
+	max_pb_check_ra(info, b_max);
+	b_min = info->next_sort;
+	b_recursive(info, b_min, b_max);
+}
+
+void	sort_push_back(t_info *info, int b_size)
+{
+	t_double_list	*b;
+
+	b = info->b;
+	if (b_size <= 0)
+		return ;
+	if (b_size == 3 && b->next->order < b->next->next->order
+		&& b->prev->order < b->next->order)
+		sb(info);
+	pa(info);
+	check_ra_loop(info);
+	sort_push_back(info, b_size - 1);
 }
