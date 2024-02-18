@@ -3,3 +3,4 @@ checker
 push_swap_tester
 *.o
 push_swap
+.vscode
