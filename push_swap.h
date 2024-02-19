@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: otawatanabe <otawatanabe@student.42.fr>    +#+  +:+       +#+        */
+/*   By: owatanab <owatanab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 13:15:17 by otawatanabe       #+#    #+#             */
-/*   Updated: 2024/02/18 13:38:46 by otawatanabe      ###   ########.fr       */
+/*   Updated: 2024/02/19 16:12:54 by owatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,9 @@ int		get_input_list(t_double_list *list, int argc, char *argv[]);
 void	reduce_ra(char *operations);
 int		check_pa_loop(t_info *info);
 void	replace_push(char *operations);
+void	deal_operations(t_info *info);
+void	check_excute_operations(char *rest, char *buf, t_info *info);
+void	excute(t_info *info, char *str);
+int		is_sorted(t_double_list *list);
 
 #endif

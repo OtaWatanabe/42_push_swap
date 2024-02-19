@@ -4,3 +4,6 @@ push_swap_tester
 *.o
 push_swap
 .vscode
+test.c
+a.out
+libft.a
