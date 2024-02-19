@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owatanab <owatanab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: otawatanabe <otawatanabe@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 10:45:01 by otawatanabe       #+#    #+#             */
-/*   Updated: 2024/02/19 17:19:58 by owatanab         ###   ########.fr       */
+/*   Updated: 2024/02/20 08:45:50 by otawatanabe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,18 +114,4 @@ void	excute(t_info *info, char *str)
 		rrr(info);
 	else
 		error_exit();
-}
-
-int	is_sorted(t_double_list *list)
-{
-	t_double_list	*tmp;
-
-	tmp = list->next;
-	while (tmp->next != list)
-	{
-		if (tmp->order + 1 != tmp->next->order)
-			return (0);
-		tmp = tmp->next;
-	}
-	return (1);
 }

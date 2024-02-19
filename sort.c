@@ -6,7 +6,7 @@
 /*   By: otawatanabe <otawatanabe@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 18:33:43 by otawatanabe       #+#    #+#             */
-/*   Updated: 2024/02/18 13:47:51 by otawatanabe      ###   ########.fr       */
+/*   Updated: 2024/02/20 08:45:55 by otawatanabe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ void	solve(t_double_list *a, int size_all)
 	t_double_list	*b;
 	t_info			*info;
 
+	if (is_sorted(a))
+		return ;
 	info = ft_calloc(1, sizeof(t_info));
 	b = malloc(sizeof(t_double_list));
 	if (b == NULL || info == NULL)
@@ -90,4 +92,18 @@ void	sort_push_back(t_info *info, int b_size)
 	pa(info);
 	check_ra_loop(info);
 	sort_push_back(info, b_size - 1);
+}
+
+int	is_sorted(t_double_list *list)
+{
+	t_double_list	*tmp;
+
+	tmp = list->next;
+	while (tmp->next != list)
+	{
+		if (tmp->order + 1 != tmp->next->order)
+			return (0);
+		tmp = tmp->next;
+	}
+	return (1);
 }
