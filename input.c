@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: otawatanabe <otawatanabe@student.42.fr>    +#+  +:+       +#+        */
+/*   By: owatanab <owatanab@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 13:13:05 by otawatanabe       #+#    #+#             */
-/*   Updated: 2024/02/19 11:48:08 by otawatanabe      ###   ########.fr       */
+/*   Updated: 2024/02/19 17:57:41 by owatanab         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ int	get_input_list(t_double_list *list, int argc, char *argv[])
 			if (i < argc)
 				next_str = argv[i];
 		}
-		++size;
+		if (++size < 0)
+			error_exit();
 	}
 	list->next = first;
 	first->prev = list;
