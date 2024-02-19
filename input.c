@@ -6,7 +6,7 @@
 /*   By: otawatanabe <otawatanabe@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 13:13:05 by otawatanabe       #+#    #+#             */
-/*   Updated: 2024/02/18 13:43:06 by otawatanabe      ###   ########.fr       */
+/*   Updated: 2024/02/19 11:48:08 by otawatanabe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	check_overflow(int integer_now, int sign, int next_digit)
 
 void	error_exit(void)
 {
-	ft_printf("Error\n");
+	ft_putendl_fd("Error", 2);
 	exit(0);
 }
 
