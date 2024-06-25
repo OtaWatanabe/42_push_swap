@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owatanab <owatanab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: otawatanabe <otawatanabe@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 13:13:05 by otawatanabe       #+#    #+#             */
-/*   Updated: 2024/02/19 17:57:41 by owatanab         ###   ########.fr       */
+/*   Updated: 2024/06/25 09:49:43 by otawatanabe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,7 @@ int	check_overflow(int integer_now, int sign, int next_digit)
 	return (0);
 }
 
-void	error_exit(void)
-{
-	ft_putendl_fd("Error", 2);
-	exit(0);
-}
-
-char	*assign_input(t_double_list *list, char *str)
+char	*assign_num(t_double_list *list, char *str)
 {
 	int				sign;
 	t_double_list	*new;
@@ -35,49 +29,66 @@ char	*assign_input(t_double_list *list, char *str)
 	sign = 1;
 	new = ft_calloc(1, sizeof(t_double_list));
 	list->next = new;
-	if (str == NULL || *str == '\0' || *str == ' ' || new == NULL)
-		error_exit();
+	if (str == NULL || new == NULL)
+		free_list_exit(list);
 	if (*str == '-' || *str == '+')
 	{
 		if (*str++ == '-')
 			sign = -1;
 	}
 	if (*str == '\0' || *str == ' ')
-		error_exit();
+		free_list_exit(list);
 	new->prev = list;
 	while (*str && *str != ' ')
 	{
 		if (*str < '0' || '9' < *str
 			|| check_overflow(new->num, sign, *str - '0'))
-			error_exit();
+			free_list_exit(list);
 		new->num = 10 * new->num + sign * (*str++ - '0');
 	}
 	return (str);
 }
 
+int	split_assign(t_double_list *list, char *str)
+{
+	int	num_count;
+
+	num_count = 0;
+	while (1)
+	{
+		while (*str == ' ')
+			++str;
+		if (*str == '\0')
+			break ;
+		if (++num_count < 0)
+			free_list_exit(list);
+		str = assign_num(list, str);
+		list = list->next;
+	}
+	if (num_count == 0)
+		free_list_exit(list);
+	return (num_count);
+}
+
 int	get_input_list(t_double_list *list, int argc, char *argv[])
 {
 	int				i;
-	t_double_list	*first;
-	char			*next_str;
 	int				size;
+	int				num_count;
+	t_double_list	*first;
 
 	i = 1;
 	first = list;
 	size = 0;
-	next_str = argv[1];
 	while (i < argc)
 	{
-		next_str = assign_input(list, ft_strtrim(next_str, " "));
-		list = list->next;
-		if (*next_str == '\0')
-		{
-			++i;
-			if (i < argc)
-				next_str = argv[i];
-		}
-		if (++size < 0)
-			error_exit();
+		num_count = split_assign(list, argv[i]);
+		size += num_count;
+		while (num_count--)
+			list = list->next;
+		++i;
+		if (size < 0)
+			free_list_exit(list);
 	}
 	list->next = first;
 	first->prev = list;

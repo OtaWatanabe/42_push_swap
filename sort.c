@@ -6,7 +6,7 @@
 /*   By: otawatanabe <otawatanabe@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 18:33:43 by otawatanabe       #+#    #+#             */
-/*   Updated: 2024/02/20 08:45:55 by otawatanabe      ###   ########.fr       */
+/*   Updated: 2024/06/25 09:48:31 by otawatanabe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	get_order(t_double_list *input_list)
 			if (list_compare->num < list->num)
 				++(list->order);
 			else if (list_compare != list && list_compare->num == list->num)
-				error_exit();
+				free_list_exit(list);
 			list_compare = list_compare->next;
 		}
 		list = list->next;
@@ -37,28 +37,29 @@ void	get_order(t_double_list *input_list)
 void	solve(t_double_list *a, int size_all)
 {
 	t_double_list	*b;
-	t_info			*info;
+	t_info			info;
 
-	if (is_sorted(a))
-		return ;
-	info = ft_calloc(1, sizeof(t_info));
-	b = malloc(sizeof(t_double_list));
-	if (b == NULL || info == NULL)
-		error_exit();
+	b = ft_calloc(1, sizeof(t_double_list));
+	if (b == NULL)
+		free_list_exit(a);
 	b->next = b;
 	b->prev = b;
-	info->a = a;
-	info->b = b;
-	info->operations = "";
+	info.a = a;
+	info.b = b;
+	info.next_sort = 0;
+	info.operations = ft_strdup("");
 	if (size_all == 0)
 		return ;
 	else if (size_all == 3)
-		sort_3(info, 0);
+		sort_3(&info, 0);
 	else if (size_all == 5)
-		sort_5(info);
+		sort_5(&info);
 	else
-		sort_many(info, size_all);
-	reduce_and_print(info->operations);
+		sort_many(&info, size_all);
+	if (info.operations == NULL)
+		free_info_exit(&info, 1);
+	reduce_and_print(info.operations);
+	free_info_exit(&info, 0);
 }
 
 void	b_recursive(t_info *info, int b_min, int b_max)

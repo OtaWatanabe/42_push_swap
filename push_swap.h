@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: owatanab <owatanab@student.42.fr>          +#+  +:+       +#+        */
+/*   By: otawatanabe <otawatanabe@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 13:15:17 by otawatanabe       #+#    #+#             */
-/*   Updated: 2024/02/19 16:12:54 by owatanab         ###   ########.fr       */
+/*   Updated: 2024/06/24 12:09:12 by otawatanabe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	rr(t_info *info);
 void	rra(t_info *info);
 void	rrb(t_info *info);
 void	rrr(t_info *info);
-void	print_all(t_double_list *a, t_double_list *b);
 void	b_recursive(t_info *info, int b_min, int b_max);
 void	range_pa(t_info *info, int min, int max);
 void	sort_push_back(t_info *info, int b_size);
@@ -73,5 +72,11 @@ void	deal_operations(t_info *info);
 void	check_excute_operations(char *rest, char *buf, t_info *info);
 void	excute(t_info *info, char *str);
 int		is_sorted(t_double_list *list);
+void	free_list(t_double_list *li);
+void	free_info_exit(t_info *info, int if_error);
+void	free_list_exit(t_double_list *li);
+int		split_assign(t_double_list *list, char *str);
+char	*assign_num(t_double_list *list, char *str);
+char	*strjoin_free(char *s1, char *s2);
 
 #endif

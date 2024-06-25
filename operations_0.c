@@ -6,7 +6,7 @@
 /*   By: otawatanabe <otawatanabe@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 16:39:02 by otawatanabe       #+#    #+#             */
-/*   Updated: 2024/02/18 13:33:32 by otawatanabe      ###   ########.fr       */
+/*   Updated: 2024/06/21 20:47:57 by otawatanabe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,9 @@ void	reverse_rotate(t_double_list *a)
 
 void	rrr(t_info *info)
 {
-	info->operations = ft_strjoin(info->operations, "rrr\n");
+	info->operations = strjoin_free(info->operations, "rrr\n");
 	if (info->operations == NULL)
-		error_exit();
+		free_info_exit(info, 1);
 	reverse_rotate(info->a);
 	reverse_rotate(info->b);
 }
