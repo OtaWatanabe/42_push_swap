@@ -1,7 +1,7 @@
 CFLAGS = -Wall -Wextra -Werror
 CC = cc
 SRCS = output.c main.c input.c ft_printf.c sort.c operations_0.c operations_1.c operations_2.c sort_1.c sort_2.c free_exit.c
-BSRCS = checker.c output.c input.c ft_printf.c sort.c operations_0.c operations_1.c operations_2.c sort_1.c sort_2.c exit.c
+BSRCS = checker.c output.c input.c ft_printf.c sort.c operations_0.c operations_1.c operations_2.c sort_1.c sort_2.c free_exit.c
 NAME = push_swap
 BONUS = checker
 OBJS = $(SRCS:.c=.o)

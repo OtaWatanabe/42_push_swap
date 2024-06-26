@@ -6,11 +6,17 @@
 /*   By: otawatanabe <otawatanabe@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 10:45:01 by otawatanabe       #+#    #+#             */
-/*   Updated: 2024/02/20 08:45:50 by otawatanabe      ###   ########.fr       */
+/*   Updated: 2024/06/26 11:14:30 by otawatanabe      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <libc.h>
+
+// __attribute__((destructor))
+// static void destructor() {
+//     system("leaks -q checker");
+// }
 
 int	main(int argc, char *argv[])
 {
@@ -23,16 +29,22 @@ int	main(int argc, char *argv[])
 		error_exit();
 	size = get_input_list(input_list, argc, argv);
 	if (size == 0)
+	{
+		free(input_list);
 		return (0);
+	}
 	get_order(input_list);
 	info.a = input_list;
 	info.b = ft_calloc(1, sizeof(t_double_list));
 	if (info.b == NULL)
-		error_exit();
+		free_list_exit(input_list);
 	info.b->next = info.b;
 	info.b->prev = info.b;
-	info.operations = "";
+	info.operations = ft_strdup("");
+	if (info.operations == NULL)
+		free_info_exit(&info, 1);
 	deal_operations(&info);
+	free_info_exit(&info, 0);
 }
 
 void	deal_operations(t_info *info)
@@ -48,7 +60,7 @@ void	deal_operations(t_info *info)
 		read_num = read(0, buf, 100000);
 		buf[read_num] = '\0';
 		if (read_num == -1)
-			error_exit();
+			free_info_exit(info, 1);
 		check_excute_operations(rest, buf, info);
 	}
 	if (info->b->next != info->b)
@@ -67,7 +79,7 @@ void	check_excute_operations(char *rest, char *buf, t_info *info)
 		return ;
 	next = ft_strchr(buf, '\n');
 	if (3 < next - buf || next == NULL)
-		error_exit();
+		free_info_exit(info, 1);
 	ft_strlcpy(rest + ft_strlen(rest), buf, next - buf + 2);
 	excute(info, rest);
 	buf = next + 1;
@@ -113,5 +125,5 @@ void	excute(t_info *info, char *str)
 	else if (ft_strncmp("rrr\n", str, 4) == 0)
 		rrr(info);
 	else
-		error_exit();
+		free_info_exit(info, 1);
 }
